@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIInventory : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject slotPrefab;
+    UISlot[] slots;
+
+    public Button backButton;
+
+    public Text userName;
+    public Text level;
+    public Text description;
+
+    private void Start()
     {
-        
+        if (backButton != null)
+        {
+            backButton.onClick.AddListener(UIManager.Instance.UIMainMenu.OpenMainMenu);
+        }
+
+        userName.text = GameManager.Instance.Player.character.UserName;
+        level.text = "Lv. " + GameManager.Instance.Player.character.Level.ToString();
+        description.text = GameManager.Instance.Player.character.Description;
+
+        InitInventoryUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InitInventoryUI()
     {
-        
+
     }
 }

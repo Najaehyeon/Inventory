@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static UIManager Instance { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private UIMainMenu uiMainMenu;
+    public UIMainMenu UIMainMenu { get; private set; }
+
+    [SerializeField] private UIStatus uiStatus;
+    public UIStatus UIStatus { get; private set; }
+
+    [SerializeField] private UIInventory uiInventory;
+    public UIInventory UIInventory { get; private set; }
+
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            UIMainMenu = uiMainMenu;
+            UIStatus = uiStatus;
+            UIInventory = uiInventory;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 }
